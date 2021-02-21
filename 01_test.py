@@ -1,5 +1,5 @@
 ########################################################################
-# import default python-library
+# import default libraries
 ########################################################################
 import os
 import csv
@@ -9,14 +9,17 @@ import gc
 
 
 ########################################################################
-# import additional python-library
+# import additional libraries
 ########################################################################
 import numpy as np
 import scipy.stats
 # from import
 from tqdm import tqdm
 from sklearn import metrics
-from sklearn.externals import joblib
+try:
+    from sklearn.externals import joblib
+except:
+    import joblib
 # original lib
 import common as com
 import keras_model

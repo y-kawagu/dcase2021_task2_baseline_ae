@@ -11,7 +11,7 @@ from keras.models import Model
 ########################################################################
 # keras model
 ########################################################################
-def get_model(input_dim, optimizer):
+def get_model(input_dim, lr):
     """
     define the keras model
     the model based on the simple dense auto encoder 
@@ -60,7 +60,8 @@ def get_model(input_dim, optimizer):
 
     model = Model(inputs=x, outputs=h)
 
-    model.compile(optimizer=optimizer, loss='mean_squared_error')
+    model.compile(optimizer=keras.optimizers.Adam(lr=lr), 
+                  loss='mean_squared_error')
 
     return model
 

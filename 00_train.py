@@ -188,7 +188,7 @@ if __name__ == "__main__":
         # train model
         print("============== MODEL TRAINING ==============")
         model = keras_model.get_model(param["feature"]["n_mels"] * param["feature"]["n_frames"],
-                                      param["fit"]["compile"]["optimizer"])
+                                      param["fit"]["lr"])
 
         model.summary()
 

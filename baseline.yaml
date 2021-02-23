@@ -16,8 +16,7 @@ feature:
   power: 2.0
 
 fit:
-  compile:
-    optimizer: adam
+  lr: 0.001
   epochs: 100
   batch_size: 512
   shuffle: True

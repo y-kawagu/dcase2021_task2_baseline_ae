@@ -237,11 +237,12 @@ In addition, we checked performing on **Ubuntu 16.04 LTS**, **18.04 LTS**, **Cen
 - Keras-Applications            == 1.0.8
 - Keras-Preprocessing           == 1.0.5
 - matplotlib                    == 3.0.3
-- numpy                         == 1.16.0
+- numpy                         == 1.18.1
 - PyYAML                        == 5.1
-- scikit-learn                  == 0.20.2
+- scikit-learn                  == 0.22.2.post1
+- scipy                         == 1.1.0
 - librosa                       == 0.6.0
 - audioread                     == 2.1.5 (more)
 - setuptools                    == 41.0.0
 - tensorflow                    == 1.15.0
-- tqdm                          == 4.23.4
+- tqdm                          == 4.43.0

@@ -132,7 +132,7 @@ Options:
 
 `00_train.py` trains a model for each machine type and store the trained models in the directory `model/`.
 
-### 6. Run test script (for development dataset)
+### 6. Run test script (for the development dataset)
 Run the test script `01_test.py`.
 Use the option `-d` for the development dataset `dev_data/<machine_type>/test/`.
 ```
@@ -225,7 +225,7 @@ From the submitted csv files, we will calculate AUC, pAUC, and your ranking.
 
 ## Dependency
 We develop the source code on Ubuntu 16.04 LTS and 18.04 LTS.
-In addition, we checked performing on **Ubuntu 16.04 LTS**, **18.04 LTS**, **Cent OS 7**, and **Windows 10**.
+In addition, we checked performing on **Ubuntu 16.04 LTS**, **18.04 LTS**, **CentOS 7**, and **Windows 10**.
 
 ### Software packages
 - p7zip-full

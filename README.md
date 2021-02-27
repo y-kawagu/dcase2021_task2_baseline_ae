@@ -29,7 +29,7 @@ So, please download the datasets in each stage:
   - Download `dev_data_<machine_type>.zip` from https://zenodo.org/record/xxxxxxx.
 - "Additional training dataset", i.e. the evaluation dataset for training
   - After launch, download `eval_data_train_<machine_type>.zip` from https://zenodo.org/record/yyyyyyy (not available until April. 1, 2021).
-- "Evaluation dataset", i.e. the evaluation for test
+- "Evaluation dataset", i.e. the evaluation dataset for test
   - After launch, download `eval_data_test_<machine_type>.zip` from https://zenodo.org/record/zzzzzzz (not available until June. 1, 2021).
 
 ### 3. Unzip dataset
@@ -81,7 +81,7 @@ Unzip the downloaded files and make the directory structure as follows:
     - /ToyTrain
 - /eval_data (Add this directory after launch)
     - /fan
-        - /train (Unzipped "additional training dataset". Normal data in the **source** and **target** domains for all sections are included.)
+        - /train (Unzipped additional training dataset. Normal data in the **source** and **target** domains for all sections are included.)
             - /section_03_source_train_normal_0000_<attribute>.wav
             - ...
             - /section_03_source_train_normal_0999_<attribute>.wav
@@ -91,14 +91,14 @@ Unzip the downloaded files and make the directory structure as follows:
             - /section_04_source_train_normal_0000_<attribute>.wav
             - ...
             - /section_05_target_train_normal_0002_<attribute>.wav
-        - /source_test (Unzipped "evaluation dataset". Normal and anomaly data in the **source** domain for all sections are included.)
+        - /source_test (Unzipped evaluation dataset. Normal and anomaly data in the **source** domain for all sections are included.)
             - /section_03_source_test_0000.wav
             - ...
             - /section_03_source_test_0199.wav
             - /section_04_source_test_0000.wav
             - ...
             - /section_05_source_test_0199.wav
-        - /target_test (Unzipped "evaluation dataset". Normal and anomaly data in the **target** domain for all sections are included.)
+        - /target_test (Unzipped evaluation dataset. Normal and anomaly data in the **target** domain for all sections are included.)
             - /section_03_target_test_0000.wav
             - ...
             - /section_03_target_test_0199.wav
@@ -115,7 +115,7 @@ Unzip the downloaded files and make the directory structure as follows:
 ### 4. Change parameters
 You can change parameters for feature extraction and model definition by editing `baseline.yaml`.
 
-### 5. Run training script (for development dataset)
+### 5. Run training script (for the development dataset)
 Run the training script `00_train.py`. 
 Use the option `-d` for the development dataset `dev_data/<machine_type>/train/`.
 ```
@@ -127,14 +127,14 @@ Options:
 | --------------------------- | --------------------------------- | ------------------------------------------------------------ | 
 | `-h`                        | `--help`                          | Application help.                                            | 
 | `-v`                        | `--version`                       | Show application version.                                    | 
-| `-d`                        | `--dev`                           | Mode for "development"                                       |  
-| `-e`                        | `--eval`                          | Mode for "evaluation"                                        | 
+| `-d`                        | `--dev`                           | Mode for the development dataset                             |  
+| `-e`                        | `--eval`                          | Mode for the additional training and evaluation datasets     | 
 
 `00_train.py` trains a model for each machine type and store the trained models in the directory `model/`.
 
 ### 6. Run test script (for development dataset)
 Run the test script `01_test.py`.
-Use the option `-d` for the development dataset **dev_data/<machine_type>/test/**.
+Use the option `-d` for the development dataset `dev_data/<machine_type>/test/`.
 ```
 $ python3.6 01_test.py -d
 ```
@@ -149,12 +149,12 @@ Each anomaly score corresponds to a wav file in the directories `dev_data/<machi
 
 `anomaly_score_fan_section_00_source_test.csv`
 ```
-section_00_source_test_normal_0000.wav	-1.4423707
-section_00_source_test_normal_0001.wav	-5.8763485
-section_00_source_test_normal_0002.wav	-2.5255458
-section_00_source_test_normal_0003.wav	-2.3934057
-section_00_source_test_normal_0004.wav	-1.2815342
-section_00_source_test_normal_0005.wav	-8.897109
+section_00_source_test_normal_0000.wav	9.020132729
+section_00_source_test_normal_0001.wav	8.894007893
+section_00_source_test_normal_0002.wav	9.085542421
+section_00_source_test_normal_0003.wav	9.769387973
+section_00_source_test_normal_0004.wav	8.656917097
+section_00_source_test_normal_0005.wav	8.899467716
   ...
 ```
 
@@ -163,11 +163,11 @@ Also, anomaly detection results after thresholding can be checked in the csv fil
 `decision_result_fan_section_00_source_test.csv`
 ```
 section_00_source_test_normal_0000.wav	0
-section_00_source_test_normal_0001.wav	1
+section_00_source_test_normal_0001.wav	0
 section_00_source_test_normal_0002.wav	0
-section_00_source_test_normal_0003.wav	0
+section_00_source_test_normal_0003.wav	1
 section_00_source_test_normal_0004.wav	0
-section_00_source_test_normal_0005.wav	1
+section_00_source_test_normal_0005.wav	0
   ...
 ```
 
@@ -177,48 +177,48 @@ Also, you can check performance indicators such as AUC, pAUC, precision, recall,
 ```  
 fan						
 section	domain	AUC	pAUC	precision	recall	F1 score
-0	source	0.75	0.533157895	0.684782609	0.63	0.65625
-1	source	0.7988	0.591578947	0.795454545	0.35	0.486111111
-2	source	0.7434	0.526842105	0.70212766	0.33	0.448979592
-0	target	0.7816	0.638947368	0.74	0.74	0.74
-1	target	0.5526	0.53	0.590361446	0.49	0.535519126
-2	target	0.7786	0.653157895	0.510526316	0.97	0.668965517
-arithmetic mean		0.734166667	0.578947368	0.670542096	0.585	0.589304224
-harmonic mean		0.722561403	0.574327542	0.656046403	0.50429309	0.570246328
+0	source	0.6738	0.573157895	0.654545455	0.36	0.464516129
+1	source	0.6786	0.505263158	0.625	0.3	0.405405405
+2	source	0.6542	0.532631579	0.685714286	0.24	0.355555556
+0	target	0.6955	0.548421053	0.657142857	0.46	0.541176471
+1	target	0.4953	0.483157895	0.5	0.35	0.411764706
+2	target	0.6441	0.559473684	0.497461929	0.98	0.65993266
+arithmetic mean		0.64025	0.533684211	0.603310754	0.448333333	0.473058488
+harmonic mean		0.631866714	0.531826049	0.592999386	0.367438982	0.453732583
   ...
 valve						
 section	domain	AUC	pAUC	precision	recall	F1 score
-0	source	0.5154	0.498947368	0.515151515	0.17	0.255639098
-1	source	0.4625	0.495789474	0.416666667	0.1	0.161290323
-2	source	0.5733	0.531052632	0.565217391	0.26	0.356164384
-0	target	0.5313	0.504210526	0.657894737	0.25	0.362318841
-1	target	0.6106	0.513684211	0.566037736	0.9	0.694980695
-2	target	0.4998	0.511052632	0.551724138	0.32	0.405063291
-arithmetic mean		0.53215	0.509122807	0.545448697	0.333333333	0.372576105
-harmonic mean		0.527825198	0.508861719	0.535256741	0.214556838	0.306324124
+0	source	0.5026	0.506842105	0.588235294	0.2	0.298507463
+1	source	0.5404	0.494210526	0.512195122	0.21	0.29787234
+2	source	0.596	0.516315789	0.615384615	0.24	0.345323741
+0	target	0.4716	0.485263158	0.382352941	0.13	0.194029851
+1	target	0.5857	0.548421053	0.519230769	0.81	0.6328125
+2	target	0.5489	0.489473684	0.55	0.22	0.314285714
+arithmetic mean		0.540866667	0.506754386	0.52789979	0.301666667	0.347138602
+harmonic mean		0.537267925	0.505885378	0.515602416	0.218970897	0.307394569
 						
 		AUC	pAUC	precision	recall	F1 score
-arithmetic mean over all machine types, sections, and domains		0.715579087	0.57952875	0.642966272	0.547498505	0.517271698
-harmonic mean over all machine types, sections, and domains		0.689876899	0.573595787	0.61590263	0.306473307	0.409285863
+arithmetic mean over all machine types, sections, and domains		0.634334516	0.537946639	0.511821964	0.448497815	0.439585489
+harmonic mean over all machine types, sections, and domains		0.620051253	0.534340265	1.55E-15	1.55E-15	1.55E-15
 ```
 
-### 8. Run training script for "additional training dataset" (after April 1, 2021)
-After the "additional training dataset" is launched, download and unzip it.
+### 8. Run training script for the additional training dataset (after April 1, 2021)
+After the additional training dataset is launched, download and unzip it.
 Move it to `eval_data/<machine_type>/train/`.
 Run the training script `00_train.py` with the option `-e`. 
 ```
 $ python3.6 00_train.py -e
 ```
-Models are trained by using the "additional training dataset" `eval_data/<machine_type>/train/`.
+Models are trained by using the additional training dataset `eval_data/<machine_type>/train/`.
 
-### 9. Run test script for "evaluation dataset" (after June 1, 2021)
-After the "evaluation dataset" for test is launched, download and unzip it.
+### 9. Run test script for the evaluation dataset (after June 1, 2021)
+After the evaluation dataset for test is launched, download and unzip it.
 Move it to `eval_data/<machine_type>/source_test/` and `eval_data/<machine_type>/target_test/`.
 Run the test script `01_test.py` with the option `-e`. 
 ```
 $ python3.6 01_test.py -e
 ```
-Anomaly scores are calculated using the "evaluation dataset", i.e., `eval_data/<machine_type>/source_test/` and `eval_data/<machine_type>/target_test/`.
+Anomaly scores are calculated using the evaluation dataset, i.e., `eval_data/<machine_type>/source_test/` and `eval_data/<machine_type>/target_test/`.
 The anomaly scores are stored as csv files in the directory `result/`.
 You can submit the csv files for the challenge.
 From the submitted csv files, we will calculate AUC, pAUC, and your ranking.

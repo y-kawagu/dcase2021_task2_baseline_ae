@@ -30,7 +30,7 @@ So, please download the datasets in each stage:
 - "Additional training dataset", i.e. the evaluation dataset for training
   - After April. 1, 2021, download `eval_data_train_<machine_type>.zip` from https://zenodo.org/record/4660992.
 - "Evaluation dataset", i.e. the evaluation dataset for test
-  - After launch, download `eval_data_test_<machine_type>.zip` from https://zenodo.org/record/zzzzzzz (not available until June. 1, 2021).
+  - After June. 1, 2021, download `eval_data_test_<machine_type>.zip` from https://zenodo.org/record/4884786.
 
 ### 3. Unzip dataset
 Unzip the downloaded files and make the directory structure as follows:
